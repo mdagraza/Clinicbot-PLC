@@ -32,9 +32,9 @@ def logger_setup(log_name):
   
   handler.namer = change_format
 
-  # Formato del log
+  # Formato del log | filename y lineno lo proporciona stacklevel
   formatter = logging.Formatter(
-      "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+      "%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s"
   )
 
   handler.setFormatter(formatter)
@@ -46,6 +46,7 @@ def logger_setup(log_name):
 def write_log(message, level="info"):
     log_func = getattr(logger, level.lower(), None) #getattr(object, name, [que devuelve si  no existe])
     if log_func:
-        log_func(message)
+        log_func(message, stacklevel=2) #stacklevel : 2=archivo que llamo la funcion
     else:
-        logger.warning(f"{level} INEXISTENTE | {message}")
+
+        logger.warning(f"{level} INEXISTENTE | {message}", stacklevel=2)
