@@ -48,5 +48,4 @@ def write_log(message, level="info"):
     if log_func:
         log_func(message, stacklevel=2) #stacklevel : 2=archivo que llamo la funcion
     else:
-
         logger.warning(f"{level} INEXISTENTE | {message}", stacklevel=2)
